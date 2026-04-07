@@ -2,17 +2,22 @@ interface SidebarProps{
     appName:string
 }
 
+const navItems =[
+    {id:1, icon: "-", label:"Dashboard"},
+    {id:2, icon: "-", label:"Users"},
+    {id:3, icon: "-", label: "Orders"},
+    {id:4, icon: "-", label:"Settings"},
+]
 function Sidebar(props:SidebarProps){
     return(
         <div>
             <h2>{props.appName}</h2>
             <nav>
-                <p>Dashboard</p>
-                <p>Users</p>
-                <p>Orders</p>
-                <p>Setting</p>
+                {navItems.map((item)=>(
+                    <p key={item.id}>{item.icon}{item.label}</p>
+                ))}
             </nav>
         </div>
     )
 }
- export default Sidebar
+export default Sidebar
