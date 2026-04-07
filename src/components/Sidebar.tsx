@@ -1,5 +1,6 @@
 interface SidebarProps{
     appName:string
+    isLoggedIn:boolean
 }
 
 const navItems =[
@@ -12,12 +13,16 @@ function Sidebar(props:SidebarProps){
     return(
         <div>
             <h2>{props.appName}</h2>
-            <nav>
-                {navItems.map((item)=>(
-                    <p key={item.id}>{item.icon}{item.label}</p>
-                ))}
-            </nav>
-        </div>
+            {props.isLoggedIn?(
+                <nav>
+                    {navItems.map((item)=>(
+                        <p key={item.id}>{item.icon}{item.label}</p>
+                    ))}
+                </nav>
+            ):(
+                <p>Pleace log in to see the menu</p>
+            )}
+        </div>    
     )
 }
 export default Sidebar
