@@ -10,4 +10,4 @@ function Header(props:HeaderProps){
         </header>
     );
 }
-export default Header;
+export default Header

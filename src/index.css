@@ -61,6 +61,10 @@
   flex-direction: column;
   box-sizing: border-box;
 }
+.app{
+  padding: 40px;
+  font-family: sans-serif;
+}
 
 body {
   margin: 0;
