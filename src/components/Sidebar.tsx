@@ -8,6 +8,7 @@ const navItems =[
     {id:2, icon: "-", label:"Users"},
     {id:3, icon: "-", label: "Orders"},
     {id:4, icon: "-", label:"Settings"},
+    {id:5, icon: "-", label: "Reports"},
 ]
 function Sidebar(props:SidebarProps){
     return(
