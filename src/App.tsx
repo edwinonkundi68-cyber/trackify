@@ -8,7 +8,7 @@ function App(){
     <div>
       <Topbar/>
       <div>
-        <button onClick={()=>setIsOpen(!isOpen)}>
+        <button onClick={()=>setIsOpen(!isOpen)}>   
           {isOpen? 'Close Sidebar':'Open Sidebar'}
         </button>
         {isOpen &&(
