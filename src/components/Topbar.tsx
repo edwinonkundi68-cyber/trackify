@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"
 function Topbar(){
     const[searchText,setSearchText]=useState('')
     const[notifications,setNotifications]=useState([
@@ -9,8 +9,11 @@ function Topbar(){
     function handleSearch(e:React.ChangeEvent<HTMLInputElement>){
         setSearchText(e.target.value)
     }
+    function clearSearch(){
+        setSearchText('')
+    }
     function removeNotification(_id:number){
-        setNotifications(notifications.filter((n)=>n.id===0))
+        setNotifications(notifications.filter((n)=>n.id !== _id))
     }
     return(
         <div>
@@ -19,6 +22,7 @@ function Topbar(){
             placeholder="Search..."
             onChange={handleSearch}
              />
+             <button onClick={clearSearch}>Clear</button>
              <span>EO</span>
              <p>You searched:{searchText}</p>
              <div>
