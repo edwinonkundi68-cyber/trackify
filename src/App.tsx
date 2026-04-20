@@ -4,16 +4,14 @@ import Topbar from "./components/Topbar"
 
 function App(){
   const[isOpen,setIsOpen]=useState(true)
+  function toggleSidebar(){
+    setIsOpen(!isOpen)
+  }
   return(
     <div>
-      <Topbar/>
+      <Topbar onToggle={toggleSidebar} />
       <div>
-        <button onClick={()=>setIsOpen(!isOpen)}>   
-          {isOpen? 'Close Sidebar':'Open Sidebar'}
-        </button>
-        {isOpen &&(
-          <Sidebar appName="Trackify" isLoggedIn={true}/>
-        )}
+        {isOpen && (<Sidebar appName="Trackify" isLoggedIn={true}/>)}
         <main>
           <p>Main content goes here</p>
         </main>
