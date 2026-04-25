@@ -1,5 +1,7 @@
-interface SidebarProps{
-    appName:string
+import { useContext } from "react"
+import { AppContext } from "../context/AppContext"
+
+        interface SidebarProps{
     isLoggedIn:boolean
 }
 
@@ -11,9 +13,11 @@ const navItems =[
     {id:5, icon: "-", label: "Reports"},
 ]
 function Sidebar(props:SidebarProps){
+    const {appName,version} = useContext(AppContext)
     return(
         <div>
-            <h2>{props.appName}</h2>
+            <h2>{appName}</h2>
+            <p>v{version}.0</p>
             {props.isLoggedIn?(
                 <nav>
                     {navItems.map((item)=>(
