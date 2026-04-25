@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface TopbarProps {
   onToggle: () => void
@@ -11,6 +11,21 @@ function Topbar(props: TopbarProps) {
     { id: 2, message: 'Orders received' },
     { id: 3, message: 'Payment confirmed' },
   ])
+  const [time, setTime] = useState(new Date())
+
+  useEffect(() => {
+    document.title = `Trackify - ${notifications.length} notifications`
+  }, [notifications])
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date())
+    }, 1000)
+
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchText(e.target.value)
@@ -27,6 +42,7 @@ function Topbar(props: TopbarProps) {
   return (
     <div>
       <h3>Dashboard</h3>
+      <span>{time.toLocaleTimeString()}</span>
       <button onClick={props.onToggle}>Toggle Sidebar</button>
       <input
         type="text"
