@@ -1,47 +1,24 @@
-import { useState, useEffect ,useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import useClock from '../hooks/useClock'
+import useNotifications from '../hooks/useNotifications'
+import useSearch from '../hooks/useSearch'
 
 interface TopbarProps {
   onToggle: () => void
 }
 
 function Topbar(props: TopbarProps) {
-  const [searchText, setSearchText] = useState('')
-  const [notifications, setNotifications] = useState([
-    { id: 1, message: 'New user signed up' },
-    { id: 2, message: 'Orders received' },
-    { id: 3, message: 'Payment confirmed' },
-  ])
-  const [time, setTime] = useState(new Date())
+  const time = useClock()
+  const { notifications, removeNotification } = useNotifications()
+  const { searchText, handleSearch, clearSearch } = useSearch()
   const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     document.title = `Trackify - ${notifications.length} notifications`
   }, [notifications])
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(new Date())
-    }, 1000)
-
-    return () => {
-      clearInterval(timer)
-    }
-  }, [])
-
-  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearchText(e.target.value)
-  }
-
-  function clearSearch() {
-    setSearchText('')
-  }
-
-  function focusSearch(){
+  function focusSearch() {
     searchRef.current?.focus()
-  }
-
-  function removeNotification(id: number) {
-    setNotifications(notifications.filter((n) => n.id !== id))
   }
 
   return (
