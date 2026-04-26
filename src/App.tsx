@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Sidebar from "./components/Sidebar"
 import Topbar from "./components/Topbar"
+import DashboardContent from "./components/DashboardContent"
 import { AppContext } from "./context/AppContext" 
 
 function App(){
@@ -18,12 +19,13 @@ function App(){
             <Sidebar isLoggedIn={true} />
           )}
           <main>
-            <h1>Welcome to Trackify</h1>
-            <p>This is the main content area.</p>
+            <DashboardContent/>
           </main>
         </div>
       </div>
+    
     </AppContext.Provider>
+
   )
 }
 export default App

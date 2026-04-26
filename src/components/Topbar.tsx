@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect ,useRef } from 'react'
 
 interface TopbarProps {
   onToggle: () => void
@@ -12,6 +12,7 @@ function Topbar(props: TopbarProps) {
     { id: 3, message: 'Payment confirmed' },
   ])
   const [time, setTime] = useState(new Date())
+  const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     document.title = `Trackify - ${notifications.length} notifications`
@@ -35,6 +36,10 @@ function Topbar(props: TopbarProps) {
     setSearchText('')
   }
 
+  function focusSearch(){
+    searchRef.current?.focus()
+  }
+
   function removeNotification(id: number) {
     setNotifications(notifications.filter((n) => n.id !== id))
   }
@@ -45,12 +50,14 @@ function Topbar(props: TopbarProps) {
       <span>{time.toLocaleTimeString()}</span>
       <button onClick={props.onToggle}>Toggle Sidebar</button>
       <input
+        ref={searchRef}
         type="text"
         placeholder="Search..."
         value={searchText}
         onChange={handleSearch}
       />
       <button onClick={clearSearch}>Clear</button>
+      <button onClick={focusSearch}>Focus Search</button>
       <span>EO</span>
       <p>You searched: {searchText}</p>
       <div>
