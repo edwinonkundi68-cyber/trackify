@@ -7,7 +7,7 @@ interface User {
   phone: string
 }
 
-function DashboardContent() {
+const DashboardContent=()=> {
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')

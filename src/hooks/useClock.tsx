@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-function useclock(){
+const useclock=()=>{
     const[time,setTime]=useState(new Date())
 
     useEffect(()=>{

@@ -2,7 +2,7 @@ interface HeaderProps{
     user:string;
 }
 // "prop"
-function Header(props:HeaderProps){
+const Header=(props:HeaderProps)=>{
     return(
         <header>
             <h1>TRACKIFY APP</h1>

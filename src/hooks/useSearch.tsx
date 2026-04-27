@@ -1,12 +1,12 @@
 import { useState } from "react"
-function useSearch() {
+const useSearch=()=> {
   const [searchText, setSearchText] = useState('')
 
-  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
+  const handleSearch=(e: React.ChangeEvent<HTMLInputElement>)=> {
     setSearchText(e.target.value)
   }
 
-  function clearSearch() {
+  const clearSearch=()=> {
     setSearchText('')
   }
 

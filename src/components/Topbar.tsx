@@ -7,7 +7,7 @@ interface TopbarProps {
   onToggle: () => void
 }
 
-function Topbar(props: TopbarProps) {
+const Topbar=(props: TopbarProps)=> {
   const time = useClock()
   const { notifications, removeNotification } = useNotifications()
   const { searchText, handleSearch, clearSearch } = useSearch()
@@ -17,7 +17,7 @@ function Topbar(props: TopbarProps) {
     document.title = `Trackify - ${notifications.length} notifications`
   }, [notifications])
 
-  function focusSearch() {
+  const focusSearch=()=> {
     searchRef.current?.focus()
   }
 

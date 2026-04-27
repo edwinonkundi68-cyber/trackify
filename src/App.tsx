@@ -1,31 +1,38 @@
-import { useState } from "react"
-import Sidebar from "./components/Sidebar"
-import Topbar from "./components/Topbar"
-import DashboardContent from "./components/DashboardContent"
-import { AppContext } from "./context/AppContext" 
+import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Sidebar from './components/Sidebar'
+import Topbar from './components/Topbar'
+import Dashboard from './pages/Dashboard'
+import Users from './pages/Users'
+import Orders from './pages/Orders'
+import Settings from './pages/Settings'
+import { AppContext } from './context/AppContext'
 
-function App(){
-  const[isOpen,setIsOpen]=useState(true)
+const App=()=> {
+  const [isOpen, setIsOpen] = useState(true)
 
-  function hundleToggle(){
+  const handleToggle=()=> {
     setIsOpen(!isOpen)
   }
-  return(
-    <AppContext.Provider value={{appName:"Trackify",version:1.0}}>
+
+  return (
+    <AppContext.Provider value={{ appName: 'Trackify', version: 1 }}>
       <div>
-        <Topbar onToggle={hundleToggle}/>
+        <Topbar onToggle={handleToggle} />
         <div>
-          {isOpen &&(
-            <Sidebar isLoggedIn={true} />
-          )}
+          {isOpen && <Sidebar isLoggedIn={true} />}
           <main>
-            <DashboardContent/>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/settings" element={<Settings />} />
+            </Routes>
           </main>
         </div>
       </div>
-    
     </AppContext.Provider>
-
   )
 }
+
 export default App
