@@ -5,6 +5,7 @@ import useSearch from '../hooks/useSearch'
 
 interface TopbarProps {
   onToggle: () => void
+  onLogout: ()=>void
 }
 
 const Topbar=(props: TopbarProps)=> {
@@ -36,6 +37,7 @@ const Topbar=(props: TopbarProps)=> {
       <button onClick={clearSearch}>Clear</button>
       <button onClick={focusSearch}>Focus Search</button>
       <span>EO</span>
+      <button onClick={props.onLogout}>Logout</button>
       <p>You searched: {searchText}</p>
       <div>
         <h4>Notifications ({notifications.length})</h4>
