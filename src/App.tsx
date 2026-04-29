@@ -1,8 +1,5 @@
-import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Sidebar from './components/Sidebar'
-import Topbar from './components/Topbar'
-import ProtectedRoute from './components/ProtectedRouter'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import AppLayout from './layouts/AppLayout'
 import Dashboard from './pages/Dashboard'
 import Users from './pages/Users'
 import UserDetail from './pages/UserDetail'
@@ -12,74 +9,19 @@ import Login from './pages/Login'
 import { AppContext } from './context/AppContext'
 
 const App = () => {
-  const [isOpen, setIsOpen] = useState(true)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen)
-  }
-
-  const handleLogin = () => {
-    setIsLoggedIn(true)
-  }
-
-  const handleLogout = () => {
-    setIsLoggedIn(false)
-  }
-
   return (
     <AppContext.Provider value={{ appName: 'Trackify', version: 1 }}>
-      <div>
-        {isLoggedIn && <Topbar onToggle={handleToggle} onLogout={handleLogout} />}
-        <div>
-          {isLoggedIn && isOpen && <Sidebar isLoggedIn={isLoggedIn} />}
-          <main>
-            <Routes>
-              <Route path="/login" element={<Login onLogin={handleLogin} />} />
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/users"
-                element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <Users />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/users/:id"
-                element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <UserDetail />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/orders"
-                element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <Orders />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/settings"
-                element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <Settings />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </main>
-        </div>
-      </div>
+      <Routes>
+        <Route path="/login" element={<Login onLogin={()=>{}} />} />
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="users" element={<Users />} />
+          <Route path="users/:id" element={<UserDetail />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
+      </Routes>
     </AppContext.Provider>
   )
 }
